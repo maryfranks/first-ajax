@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function() {
   var rootButton = document.getElementById("root-request");
   var pingPong = document.getElementById("ping-pong");
   var countButton = document.getElementById("count");
+  var timeButton = document.getElementById("time");
+  var carButton = document.getElementById("car");
 
   rootButton.addEventListener("click", function() {
     $.ajax({
@@ -42,6 +44,32 @@ document.addEventListener("DOMContentLoaded", function() {
       newElement.innerText = responseData;
       document.getElementById("step7").append(newElement);
     });
+  });
+
+  timeButton.addEventListener("click", function() {
+    $.ajax({
+      url: "http://first-ajax-api.herokuapp.com/time",
+      method: "GET",
+      data: {timezone: "America/Mexico_City"},
+      dataType: "text"
+    }).done( function( responseData ) {
+      var newElement = document.createElement('p');
+      newElement.innerText = responseData;
+      document.getElementById("step8").append(newElement);
+    });
+  });
+
+  carButton.addEventListener("click", function() {
+    $.ajax({
+      url: "http://first-ajax-api.herokuapp.com/a_car",
+      method: "GET",
+      dataType: "html"
+    }).done( function( responseData ) {
+      var newElement = document.createElement('li');
+      newElement.innerHTML = responseData;
+      document.getElementById("car-list").append(newElement);
+    });
+
   });
 
 });
